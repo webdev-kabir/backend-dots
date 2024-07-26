@@ -3,14 +3,11 @@ import mongoose from 'mongoose';
 const postSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
-    author: { type: String, required: true },
-    username: { type: String, required: true }, // Ensure this field is required if needed
-    description: { type: String, required: true }, // Ensure this field is required if needed
+    author: { type: String, required: true }, // Added author field
     categories: { type: [String], default: [] },
     published: { type: Boolean, default: false }
 }, { timestamps: true });
 
+const Post = mongoose.model('Post', postSchema);
 
-const post = mongoose.model('post', postSchema);
-
-export default post;
+export default Post;

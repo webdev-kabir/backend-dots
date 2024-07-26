@@ -2,12 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-
-// Database Connection
 import connectDB from './src/config/db.js';
-
-// Routes
-import blogRoutes from './src/routes/blogRoutes.js';  // Ensure this matches your actual routes file
+import blogRoutes from './src/routes/blogRoutes.js';
+import userRoutes from './src/routes/userRoutes.js';  // Import user routes
 
 dotenv.config();
 
@@ -18,12 +15,13 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Route Handlers
-app.use('/api/posts', blogRoutes);  // Update to your actual route
+// Routes
+app.use('/api/posts', blogRoutes);
+app.use('/api/users', userRoutes);  // Add user routes
 
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);  // Log the error stack for debugging
+    console.error(err.stack);
     res.status(500).json({ message: 'Something went wrong!' });
 });
 
